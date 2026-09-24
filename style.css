@@ -1,0 +1,281 @@
+/* =========================
+   RESET
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =========================
+   BODY
+========================= */
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f7fb;
+    color: #222;
+    padding: 30px;
+}
+
+
+/* =========================
+   MAIN CONTAINER
+========================= */
+
+.container {
+    max-width: 1000px;
+    margin: auto;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+h1 {
+    text-align: center;
+    font-size: 36px;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #777;
+    margin-bottom: 30px;
+}
+
+
+/* =========================
+   SUMMARY CARDS
+========================= */
+
+.summary {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+
+    text-align: center;
+}
+
+.card h3 {
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+
+/* =========================
+   SECTIONS
+========================= */
+
+.form-section,
+.expense-section {
+    background: white;
+
+    padding: 25px;
+
+    margin-bottom: 25px;
+
+    border-radius: 15px;
+
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+
+/* =========================
+   INPUTS & SELECT
+========================= */
+
+input,
+select {
+    width: 100%;
+
+    padding: 13px;
+
+    margin-bottom: 12px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 8px;
+
+    font-size: 15px;
+
+    background: white;
+
+    color: #222;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+
+    border-color: #555;
+
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05);
+}
+
+
+/* =========================
+   ADD BUTTON
+========================= */
+
+button {
+    width: 100%;
+
+    padding: 13px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #222;
+
+    color: white;
+
+    font-size: 15px;
+
+    cursor: pointer;
+}
+
+button:hover {
+    background: #444;
+}
+
+
+/* =========================
+   SEARCH & FILTER
+========================= */
+
+.filters {
+    display: grid;
+
+    grid-template-columns: 2fr 1fr;
+
+    gap: 15px;
+
+    margin-bottom: 20px;
+}
+
+
+/* IMPORTANT:
+   Remove extra bottom margin
+   from search/filter inputs
+*/
+
+.filters input,
+.filters select {
+    margin-bottom: 0;
+}
+
+
+/* =========================
+   EXPENSE LIST
+========================= */
+
+#expenseList {
+    list-style: none;
+}
+
+.expense-item {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 18px 0;
+
+    border-bottom: 1px solid #eee;
+}
+
+.expense-info h3 {
+    margin-bottom: 5px;
+}
+
+.expense-info p {
+    color: #777;
+
+    font-size: 14px;
+}
+
+
+/* =========================
+   DELETE BUTTON
+========================= */
+
+.delete-btn {
+    width: auto;
+
+    padding: 8px 15px;
+
+    background: #e74c3c;
+}
+
+.delete-btn:hover {
+    background: #c0392b;
+}
+
+
+/* =========================
+   CHART
+========================= */
+
+#expenseChart {
+    max-height: 350px;
+}
+
+
+/* =========================
+   MOBILE RESPONSIVE
+========================= */
+
+@media (max-width: 700px) {
+
+    body {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .summary {
+        grid-template-columns: 1fr;
+    }
+
+    .filters {
+        grid-template-columns: 1fr;
+    }
+
+    .expense-item {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 12px;
+    }
+
+    .delete-btn {
+        width: 100%;
+    }
+}
