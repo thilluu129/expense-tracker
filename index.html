@@ -5,39 +5,152 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Expense Tracker</title>
 
-    <!-- CSS -->
     <link rel="stylesheet" href="style.css">
 
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+    <!-- Chart.js Data Labels Plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+
 </head>
+
 
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <!-- HEADER -->
 
-        <h1>Expense Tracker</h1>
+    <!-- ================= HEADER ================= -->
 
-        <p class="subtitle">
-            Track your daily expenses easily
+    <header class="header">
+
+        <div class="header-text">
+
+            <span class="badge">
+                PERSONAL FINANCE
+            </span>
+
+            <h1>
+                Expense Tracker
+            </h1>
+
+            <p>
+                Track, manage and analyze your expenses month by month.
+            </p>
+
+        </div>
+
+
+        <button
+            id="themeButton"
+            class="theme-button"
+            onclick="toggleDarkMode()">
+
+            🌙 Dark Mode
+
+        </button>
+
+    </header>
+
+
+
+    <!-- ================= MONTH SELECTOR ================= -->
+
+    <section class="section-card month-section">
+
+        <div class="section-title">
+
+            <span class="section-label">
+                MONTHLY MANAGEMENT
+            </span>
+
+            <h2>
+                Select Month
+            </h2>
+
+            <p class="section-description">
+                Select a month to manage its budget and expenses separately.
+            </p>
+
+        </div>
+
+
+        <div class="month-controls">
+
+            <div>
+
+                <label for="monthSelector">
+                    Month
+                </label>
+
+                <select id="monthSelector">
+
+                    <option value="0">January</option>
+                    <option value="1">February</option>
+                    <option value="2">March</option>
+                    <option value="3">April</option>
+                    <option value="4">May</option>
+                    <option value="5">June</option>
+                    <option value="6">July</option>
+                    <option value="7">August</option>
+                    <option value="8">September</option>
+                    <option value="9">October</option>
+                    <option value="10">November</option>
+                    <option value="11">December</option>
+
+                </select>
+
+            </div>
+
+
+            <div>
+
+                <label for="yearSelector">
+                    Year
+                </label>
+
+                <select id="yearSelector"></select>
+
+            </div>
+
+        </div>
+
+
+        <p class="selected-month">
+
+            Managing:
+
+            <strong id="selectedMonthText">
+                -
+            </strong>
+
         </p>
 
+    </section>
 
-        <!-- SUMMARY -->
 
-        <div class="summary">
 
-            <div class="card">
+    <!-- ================= SUMMARY ================= -->
 
-                <h3>Total Expenses</h3>
+    <section class="summary">
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                ₹
+            </div>
+
+            <div>
+
+                <h3>
+                    Monthly Expenses
+                </h3>
 
                 <p>
                     ₹<span id="totalAmount">0</span>
@@ -45,10 +158,21 @@
 
             </div>
 
+        </div>
 
-            <div class="card">
 
-                <h3>Transactions</h3>
+
+        <div class="card">
+
+            <div class="card-icon">
+                #
+            </div>
+
+            <div>
+
+                <h3>
+                    Transactions
+                </h3>
 
                 <p id="transactionCount">
                     0
@@ -59,28 +183,220 @@
         </div>
 
 
-        <!-- ADD EXPENSE -->
 
-        <div class="form-section">
+        <div class="card">
 
-            <h2>Add Expense</h2>
+            <div class="card-icon">
+                ₹
+            </div>
+
+            <div>
+
+                <h3>
+                    Monthly Budget
+                </h3>
+
+                <p>
+                    ₹<span id="budgetAmount">0</span>
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                ✓
+            </div>
+
+            <div>
+
+                <h3>
+                    Remaining
+                </h3>
+
+                <p>
+                    ₹<span id="remainingBudget">0</span>
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= BUDGET ================= -->
+
+    <section class="section-card">
+
+        <div class="section-title">
+
+            <span class="section-label">
+                BUDGET
+            </span>
+
+            <h2>
+                Set Monthly Budget
+            </h2>
+
+            <p class="section-description">
+                Set a separate budget for the selected month.
+            </p>
+
+        </div>
+
+
+        <div class="budget-form">
+
+            <input
+                type="number"
+                id="budgetInput"
+                placeholder="Enter monthly budget"
+                min="0">
+
+
+            <button onclick="setBudget()">
+                Set Budget
+            </button>
+
+        </div>
+
+
+        <p
+            id="budgetMessage"
+            class="message">
+        </p>
+
+    </section>
+
+
+
+    <!-- ================= SPENDING PROGRESS ================= -->
+
+    <section class="section-card progress-card">
+
+        <div class="section-title">
+
+            <span class="section-label">
+                BUDGET PROGRESS
+            </span>
+
+            <h2>
+                Monthly Spending Progress
+            </h2>
+
+            <p class="section-description">
+                See how much of your monthly budget has been used.
+            </p>
+
+        </div>
+
+
+        <div class="progress-header">
+
+            <div>
+
+                <span>
+                    Spent
+                </span>
+
+                <strong id="progressSpent">
+                    ₹0
+                </strong>
+
+            </div>
+
+
+            <div class="progress-percentage">
+
+                <strong id="progressPercent">
+                    0%
+                </strong>
+
+            </div>
+
+
+            <div class="progress-budget">
+
+                <span>
+                    Budget
+                </span>
+
+                <strong id="progressBudget">
+                    ₹0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="progress-bar">
+
+            <div
+                id="budgetProgressBar"
+                class="progress-fill">
+
+            </div>
+
+        </div>
+
+
+        <p
+            id="progressMessage"
+            class="progress-message">
+
+            Set a budget to see your spending progress.
+
+        </p>
+
+    </section>
+
+
+
+    <!-- ================= ADD EXPENSE ================= -->
+
+    <section class="section-card">
+
+        <div class="section-title">
+
+            <span class="section-label">
+                TRANSACTION
+            </span>
+
+            <h2>
+                Add Expense
+            </h2>
+
+            <p class="section-description">
+                Add an expense to the selected month.
+            </p>
+
+        </div>
+
+
+        <div class="expense-form">
 
 
             <input
                 type="text"
                 id="expenseName"
-                placeholder="Expense name"
-            >
+                placeholder="Expense name">
 
 
             <input
                 type="number"
                 id="expenseAmount"
                 placeholder="Amount"
-            >
+                min="0">
 
 
-            <select id="expenseCategory" aria-label="Expense category">
+            <select id="expenseCategory">
 
                 <option value="">
                     Select Category
@@ -109,92 +425,227 @@
             </select>
 
 
-            <label for="expenseDate">Expense date</label>
-
-            <input type="date"
-                id="expenseDate"
-            >
+            <input
+                type="date"
+                id="expenseDate">
 
 
-            <button onclick="addExpense()">
+            <button
+                id="expenseButton"
+                onclick="addExpense()">
+
                 Add Expense
+
+            </button>
+
+
+            <button
+                id="cancelEditButton"
+                class="cancel-btn"
+                onclick="cancelEdit()"
+                style="display:none;">
+
+                Cancel Edit
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= EXPENSE HISTORY ================= -->
+
+    <section class="section-card">
+
+
+        <div class="section-header">
+
+            <div>
+
+                <span class="section-label">
+                    HISTORY
+                </span>
+
+                <h2>
+                    Expense History
+                </h2>
+
+            </div>
+
+
+            <button
+                class="csv-btn"
+                onclick="downloadCSV()">
+
+                📥 Download CSV
+
             </button>
 
         </div>
 
 
-        <!-- EXPENSE HISTORY -->
 
-        <div class="expense-section">
+        <!-- FILTERS -->
 
-            <h2>Expense History</h2>
-
-
-            <!-- SEARCH AND FILTER -->
-
-            <div class="filters">
-
-                <input
-                    type="text"
-                    id="searchExpense"
-                    placeholder="Search expense..."
-                >
+        <div class="filters">
 
 
-                <select id="filterCategory" aria-label="Filter expenses by category">
-
-                    <option value="All">
-                        All Categories
-                    </option>
-
-                    <option value="Food">
-                        Food
-                    </option>
-
-                    <option value="Travel">
-                        Travel
-                    </option>
-
-                    <option value="Shopping">
-                        Shopping
-                    </option>
-
-                    <option value="Education">
-                        Education
-                    </option>
-
-                    <option value="Other">
-                        Other
-                    </option>
-
-                </select>
-
-            </div>
+            <input
+                type="text"
+                id="searchExpense"
+                placeholder="🔍 Search expense...">
 
 
-            <!-- EXPENSE LIST -->
+            <select id="filterCategory">
 
-            <ul id="expenseList"></ul>
+                <option value="All">
+                    All Categories
+                </option>
+
+                <option value="Food">
+                    Food
+                </option>
+
+                <option value="Travel">
+                    Travel
+                </option>
+
+                <option value="Shopping">
+                    Shopping
+                </option>
+
+                <option value="Education">
+                    Education
+                </option>
+
+                <option value="Other">
+                    Other
+                </option>
+
+            </select>
+
+
+            <input
+                type="date"
+                id="filterDate">
+
+
+            <button
+                class="clear-btn"
+                onclick="clearDateFilter()">
+
+                Clear Date
+
+            </button>
 
         </div>
 
 
-        <!-- EXPENSE ANALYSIS -->
 
-        <div class="expense-section">
+        <!-- DATE SUMMARY -->
 
-            <h2>Expense Analysis</h2>
+        <div class="date-summary">
+
+
+            <div>
+
+                <span>
+                    Selected Date Total
+                </span>
+
+                <strong>
+                    ₹<span id="dateTotal">0</span>
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    Transactions
+                </span>
+
+                <strong id="dateCount">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- EXPENSE LIST -->
+
+        <ul id="expenseList"></ul>
+
+    </section>
+
+
+
+    <!-- ================= PIE CHART ================= -->
+
+    <section class="section-card chart-section">
+
+
+        <div class="section-title">
+
+            <span class="section-label">
+                ANALYTICS
+            </span>
+
+            <h2>
+                Monthly Expense Analysis
+            </h2>
+
+            <p class="section-description">
+
+                Category-wise expense breakdown for
+
+                <strong id="chartMonthName">
+                    selected month
+                </strong>.
+
+            </p>
+
+        </div>
+
+
+        <div class="chart-container">
 
             <canvas id="expenseChart"></canvas>
 
         </div>
 
-    </div>
+
+    </section>
 
 
-    <!-- JAVASCRIPT -->
 
-    <script src="script.js"></script>
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <p>
+
+            Expense Tracker
+
+            <span>•</span>
+
+            Built with HTML, CSS & JavaScript
+
+        </p>
+
+    </footer>
+
+
+</div>
+
+
+<script src="script.js"></script>
 
 </body>
 
